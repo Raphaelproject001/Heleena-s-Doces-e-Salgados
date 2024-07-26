@@ -1,60 +1,294 @@
-pip install secure-smtplib schedule
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Lanches</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <h1>Loja de Lanches</h1>
+            <nav>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#produtos">Produtos</a></li>
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from datetime import date
-import schedule
-import time
+    <!-- Banner Principal -->
+    <section id="home" class="banner">
+        <div class="container">
+            <h2>Bem-vindo à nossa loja de lanches!</h2>
+            <p>Encontre os melhores lanches aqui.</p>
+            <a href="#produtos" class="cta-button">Veja nossos produtos</a>
+        </div>
+    </section>
 
-# Função para enviar e-mail
-def send_email():
-    # Configurações do servidor SMTP
-    smtp_host = 'smtp.example.com'  # Coloque o seu servidor SMTP aqui
-    smtp_port = 587  # Coloque a porta SMTP aqui (geralmente 587 para TLS)
+    <!-- Seção de Destaque -->
+    <section id="destaques" class="destaques">
+        <div class="container">
+            <h2>Em Destaque</h2>
+            <div class="product">
+                <img src="path/to/image1.jpg" alt="Produto 1">
+                <h3>Nome do Produto 1</h3>
+                <p>Descrição breve do produto 1.</p>
+                <span>R$ 10,00</span>
+                <a href="#produtos" class="cta-button">Comprar Agora</a>
+            </div>
+            <!-- Adicione mais produtos em destaque aqui -->
+        </div>
+    </section>
 
-    # Credenciais de login do remetente
-    sender_email = 'seu_email@example.com'  # Coloque o seu e-mail aqui
-    sender_password = 'sua_senha'  # Coloque a sua senha aqui
+    <!-- Página de Produtos -->
+    <section id="produtos" class="produtos">
+        <div class="container">
+            <h2>Nossos Produtos</h2>
+            <div class="filters">
+                <button class="filter-btn" onclick="filterProducts('all')">Todos</button>
+                <button class="filter-btn" onclick="filterProducts('salgados')">Salgados</button>
+                <button class="filter-btn" onclick="filterProducts('doces')">Doces</button>
+                <button class="filter-btn" onclick="filterProducts('bebidas')">Bebidas</button>
+            </div>
+            <div id="product-list">
+                <!-- Lista de Produtos -->
+                <div class="product" data-category="salgados">
+                    <img src="path/to/image2.jpg" alt="Produto 2">
+                    <h3>Nome do Produto 2</h3>
+                    <p>Descrição breve do produto 2.</p>
+                    <span>R$ 12,00</span>
+                    <a href="#" class="cta-button">Comprar Agora</a>
+                </div>
+                <!-- Adicione mais produtos aqui -->
+            </div>
+        </div>
+    </section>
 
-    # Destinatário do e-mail
-    receiver_email = 'destinatario@example.com'  # Coloque o e-mail do destinatário aqui
+    <!-- Página Sobre Nós -->
+    <section id="sobre" class="sobre">
+        <div class="container">
+            <h2>Sobre Nós</h2>
+            <p>Informações sobre a empresa.</p>
+        </div>
+    </section>
 
-    # Criando o objeto MIMEMultipart
-    message = MIMEMultipart()
-    message['From'] = sender_email
-    message['To'] = receiver_email
-    message['Subject'] = f'Relatório Diário - {date.today()}'
+    <!-- Página de Contato -->
+    <section id="contato" class="contato">
+        <div class="container">
+            <h2>Contato</h2>
+            <form id="contact-form">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="message">Mensagem:</label>
+                <textarea id="message" name="message" required></textarea>
+                <button type="submit" class="cta-button">Enviar</button>
+            </form>
+        </div>
+    </section>
 
-    # Corpo da mensagem do e-mail
-    body = """
-    Olá,
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Loja de Lanches. Todos os direitos reservados.</p>
+            <div class="social-media">
+                <a href="#" aria-label="Facebook">Facebook</a>
+                <a href="#" aria-label="Instagram">Instagram</a>
+                <!-- Adicione mais redes sociais se desejar -->
+            </div>
+        </div>
+    </footer>
 
-    Aqui está o relatório diário de hoje.
+    <script src="scripts.js"></script>
+</body>
+</html>
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    Anexos: [coloque aqui os anexos ou corpo do relatório]
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
 
-    Atenciosamente,
-    Seu Nome
-    """
-    message.attach(MIMEText(body, 'plain'))
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
 
-    # Conectando-se ao servidor SMTP e enviando e-mail
-    try:
-        smtp_server = smtplib.SMTP(smtp_host, smtp_port)
-        smtp_server.starttls()
-        smtp_server.login(sender_email, sender_password)
-        smtp_server.sendmail(sender_email, receiver_email, message.as_string())
-        smtp_server.quit()
-        print(f'E-mail enviado para {receiver_email} com sucesso!')
-    except Exception as e:
-        print(f'Erro ao enviar e-mail: {str(e)}')
+/* Header */
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+}
 
-# Agendando o envio do e-mail diariamente às 8:00
-schedule.every().day.at("08:00").do(send_email)
+header h1 {
+    margin: 0;
+}
 
-# Loop para manter o script rodando para verificar o agendamento
-while True:
-    schedule.run_pending()
-    time.sleep(60)  # Espera 60 segundos antes de verificar novamente
+header nav ul {
+    list-style: none;
+}
+
+header nav ul li {
+    display: inline;
+    margin-right: 1rem;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Banner Principal */
+.banner {
+    background: url('path/to/banner-image.jpg') no-repeat center center/cover;
+    color: #fff;
+    text-align: center;
+    padding: 5rem 0;
+}
+
+.banner h2 {
+    margin-bottom: 0.5rem;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    background: #e8491d;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Seção de Destaque */
+.destaques {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.product {
+    display: inline-block;
+    width: 200px;
+    margin: 1rem;
+    text-align: center;
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+}
+
+/* Página de Produtos */
+.produtos {
+    padding: 2rem 0;
+}
+
+.filters {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.filter-btn {
+    background: #e8491d;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.filter-btn:hover {
+    background: #d4381d;
+}
+
+#product-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product {
+    margin: 1rem;
+}
+
+/* Página Sobre Nós e Contato */
+.sobre, .contato {
+    padding: 2rem 0;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form button {
+    background: #e8491d;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background: #d4381d;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+footer .social-media a {
+    color: #fff;
+    margin: 0 0.5rem;
+    text-decoration: none;
+}
+// Função para filtrar produtos
+function filterProducts(category) {
+    const products = document.querySelectorAll('#product-list .product');
+    products.forEach(product => {
+        if (category === 'all' || product.getAttribute('data-category') === category) {
+            product.style.display = 'block';
+        } else {
+            product.style.display = 'none';
+        }
+    });
+}
+
+// Validação e envio do formulário de contato
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    alert('Mensagem enviada com sucesso!');
+    this.reset();
+});
 
