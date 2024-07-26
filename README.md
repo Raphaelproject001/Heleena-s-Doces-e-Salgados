@@ -35,9 +35,9 @@
         <div class="container">
             <h2>Em Destaque</h2>
             <div class="product">
-                <img src="path/to/image1.jpg" alt="Produto 1">
-                <h3>Nome do Produto 1</h3>
-                <p>Descrição breve do produto 1.</p>
+                <img src="https://photos.app.goo.gl/qwgbnu1rPi8ze4429" alt="Produto 1">
+                <h3>Bolos</h3>
+                <p>Bolos com cobertura de chocolate.</p>
                 <span>R$ 10,00</span>
                 <a href="#produtos" class="cta-button">Comprar Agora</a>
             </div>
@@ -58,9 +58,9 @@
             <div id="product-list">
                 <!-- Lista de Produtos -->
                 <div class="product" data-category="salgados">
-                    <img src="path/to/image2.jpg" alt="Produto 2">
-                    <h3>Nome do Produto 2</h3>
-                    <p>Descrição breve do produto 2.</p>
+                    <img src="https://photos.app.goo.gl/TxMguZSrXV68MDB57" alt="Produto 2">
+                    <h3>Salgados</h3>
+                    <p>Salgados com Recheios de frango,queijo etc.</p>
                     <span>R$ 12,00</span>
                     <a href="#" class="cta-button">Comprar Agora</a>
                 </div>
