@@ -2,14 +2,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loja de Lanches</title>
+    <title>Seleena's Doces e Salgados</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="container">
-            <h1>Loja de Lanches</h1>
+            <h1>Temos Cardápios Variados para Clientela</h1>
             <nav>
                 <ul>
                     <li><a href="#home">Início</a></li>
